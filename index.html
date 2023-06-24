@@ -1,0 +1,199 @@
+<!-- <html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="/lineage.min.js"></script>
+    <link rel="stylesheet" href="/lineage.min.css" />
+  </head>
+  <body>
+    <div id="divFamily"></div>
+    <script>
+      var jsonData = [
+        {
+          id: 1,
+          pid: 2,
+          addr: "",
+          name: "Father",
+          photo: "",
+          title: "Title",
+          gender: "male",
+        },
+        {
+          id: 2,
+          pid: 1,
+          addr: "",
+          name: "Mother",
+          photo: "",
+          title: "Title",
+          gender: "female",
+        },
+        {
+          id: 3,
+          fid: 1,
+          mid: 2,
+          pid: 4,
+          addr: "",
+          name: "Daughter",
+          photo: "//unsplash.it/80/80",
+          title: "Title",
+          gender: "female",
+        },
+        {
+          id: 4,
+          pid: 3,
+          addr: "",
+          name: "Son-in-Law",
+          photo: "",
+          title: "Title",
+          gender: "male",
+        },
+        {
+          id: 5,
+          fid: 4,
+          mid: 3,
+          addr: "",
+          name: "Son",
+          photo: "",
+          title: "Title",
+          gender: "male",
+          pid: "5ad52abd-5d67-4383-869b-0f8e1f9422fb",
+        },
+        {
+          id: 6,
+          fid: 4,
+          mid: 3,
+          pid: 11,
+          addr: "",
+          name: "Son2",
+          photo: "",
+          title: "Title",
+          gender: "male",
+        },
+        {
+          id: 7,
+          fid: 1,
+          mid: 2,
+          addr: "",
+          name: "Wife2",
+          photo: "",
+          title: "Title",
+          gender: "female",
+        },
+        {
+          id: 8,
+          pid: 1,
+          addr: "",
+          name: "Test2",
+          photo: "",
+          title: "Title",
+          gender: "female",
+        },
+        {
+          id: 9,
+          fid: 1,
+          mid: 2,
+          addr: "",
+          name: "Indrajit",
+          photo: "",
+          title: "Rohit",
+          gender: "female",
+        },
+        {
+          id: 10,
+          fid: 1,
+          mid: 2,
+          addr: "",
+          name: "Nirmal Hui",
+          photo: "",
+          title: "New test",
+          gender: "female",
+        },
+        {
+          id: 11,
+          pid: 6,
+          addr: "",
+          name: "Hui Hui",
+          photo: "",
+          title: "New test",
+          gender: "female",
+        },
+        {
+          id: "5ad52abd-5d67-4383-869b-0f8e1f9422fb",
+          addr: "",
+          name: "Samay",
+          gender: "female",
+          photo: "Image-link",
+          title: "",
+        },
+      ];
+      var params = {
+        data: jsonData /*Local variable or file path*/,
+        search: false, //false
+        container: "divFamily",
+        template: "rounded", // "rounded" // "raised" // "tilted"
+      };
+      var tree = new Lineage(params);
+      tree.load();
+    </script>
+  </body>
+</html> -->
+
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="/lineage.min.js"></script>
+    <link rel="stylesheet" href="/lineage.min.css" />
+  </head>
+  <body>
+    <div id="divFamily"></div>
+    <script>
+      var jsonData = [];
+      var params = {};
+
+      // Function to make the GET request and return a promise with the response data
+      function fetchData() {
+        var token =
+          "b3df9224bfe1011573ba644191a488b2bedd93ce4b6ae2f4626ff5f07fc84265ae218e87daf0db4d7a9674bf43d2aeb589fd4d0ed380ab1df7b81a6c3d1f5d8733831fdef0f00a30ed3efaab4f3a6e95ace8429a18ca1d8e19bf76268a11195255fe5c48031ebf33d52b85a70f016e758b7ce0554f6a8c3a891320f72eb3e186";
+
+        var headers = {
+          Authorization: "Bearer " + token,
+        };
+
+        return fetch(
+          "http://localhost:1337/api/v2/relations/huihuihui@gmail.com",
+          { headers }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Data,", data);
+            jsonData = data.data.attributes.family;
+            loadFamilyTree();
+          })
+          .catch((error) => {
+            console.log("Error:", error);
+          });
+      }
+
+      // Function to load the family tree with the updated data
+      function loadFamilyTree() {
+        var params = {
+          data: jsonData,
+          search: false,
+          container: "divFamily",
+          template: "rounded",
+        };
+        console.log("Formation started", params);
+        var tree = new Lineage(params);
+        tree.load();
+      }
+
+      console.log("Start of script");
+
+      if (jsonData.length == 0) {
+        fetchData();
+      } else {
+        console.log("JSOn", jsonData);
+        loadFamilyTree();
+      }
+    </script>
+  </body>
+</html>
