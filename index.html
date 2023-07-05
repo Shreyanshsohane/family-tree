@@ -146,6 +146,7 @@
   </head>
   <body>
     <div id="divFamily"></div>
+    <div id="test"></div>
     <script src="/lineage.min.js"></script>
     <script>
       var jsonData = [];
@@ -153,6 +154,8 @@
 
       const paramsMeter = new URLSearchParams(window.location.search);
       console.log("Tpken", paramsMeter.get("token"));
+      const ele = document.getElementById("test");
+      ele.innerHTML = paramsMeter.get("token");
       console.log("Params", paramsMeter);
 
       // Function to make the GET request and return a promise with the response data
