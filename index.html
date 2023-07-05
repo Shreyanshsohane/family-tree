@@ -151,6 +151,10 @@
       var jsonData = [];
       var params = {};
 
+      const paramsMeter = new URLSearchParams(window.location.search);
+      console.log("Tpken", paramsMeter.get("token"));
+      console.log("Params", paramsMeter);
+
       // Function to make the GET request and return a promise with the response data
       function fetchData() {
         var token =
