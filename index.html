@@ -1,279 +1,14 @@
-<!-- <html>
-  <head>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="/lineage.min.js"></script>
-    <link rel="stylesheet" href="/lineage.min.css" />
-  </head>
-  <body>
-    <div id="divFamily"></div>
-    <script>
-      var jsonData = [
-        {
-          spouseId: 5,
-          user: {
-            id: 1,
-            name: "Father Doe",
-            gender: "male",
-          },
-        },
-        {
-          spouseId: 1,
-          user: {
-            id: 5,
-            name: "Mommy Doe",
-            gender: "female",
-          },
-        },
-        {
-          parentId: 1,
-          spouseId: 6,
-          user: {
-            id: 2,
-            name: "Jane Doe",
-            gender: "female",
-          },
-        },
-        {
-          parentId: 1,
-          user: {
-            id: 3,
-            name: "Kane Doe",
-            gender: "male",
-          },
-        },
-        {
-          parentId: 2,
-
-          user: {
-            id: 4,
-            name: "Jane's Daughter",
-            gender: "female",
-          },
-        },
-        {
-          parentId: 6,
-
-          user: {
-            id: 4,
-            name: "Jane's Daughter",
-            gender: "female",
-          },
-        },
-        {
-          parentId: 5,
-          spouseId: 6,
-          user: {
-            id: 2,
-            name: "Jane Doe",
-            gender: "female",
-          },
-        },
-        {
-          parentId: 5,
-          user: {
-            id: 3,
-            name: "Kane Doe",
-            gender: "male",
-          },
-        },
-        {
-          spouseId: 2,
-          user: {
-            id: 6,
-            name: "Test Doe",
-            gender: "male",
-          },
-        },
-      ];
-      // var jsonData = [
-      //   {
-      //     id: 1,
-      //     name: "Father Doe",
-      //     addr: "",
-      //     photo: "",
-      //     title: "Title",
-      //     gender: "male",
-      //     pid: 5,
-      //   },
-      //   {
-      //     id: 5,
-      //     name: "Mommy Doe",
-      //     addr: "",
-      //     photo: "",
-      //     title: "Title",
-      //     gender: "female",
-      //     pid: 1,
-      //   },
-      //   {
-      //     id: 2,
-      //     name: "Jane Doe",
-      //     addr: "",
-      //     photo: "",
-      //     title: "Title",
-      //     gender: "female",
-      //     fid: 1,
-      //     mid: 5,
-      //     pid: 6,
-      //   },
-      //   {
-      //     id: 3,
-      //     name: "Kane Doe",
-      //     addr: "",
-      //     photo: "",
-      //     title: "Title",
-      //     gender: "male",
-      //     fid: 1,
-      //     mid: 5,
-      //     pid: undefined,
-      //   },
-      //   {
-      //     id: 4,
-      //     name: "Jane's Daughter",
-      //     addr: "",
-      //     photo: "",
-      //     title: "Title",
-      //     gender: "female",
-      //     fid: 1,
-      //     mid: 5,
-      //     pid: undefined,
-      //   },
-      //   {
-      //     id: 4,
-      //     name: "Jane's Daughter",
-      //     addr: "",
-      //     photo: "",
-      //     title: "Title",
-      //     gender: "female",
-      //     fid: 1,
-      //     mid: 5,
-      //     pid: undefined,
-      //   },
-      //   {
-      //     id: 2,
-      //     name: "Jane Doe",
-      //     addr: "",
-      //     photo: "",
-      //     title: "Title",
-      //     gender: "female",
-      //     fid: 1,
-      //     mid: 5,
-      //     pid: 6,
-      //   },
-      //   {
-      //     id: 3,
-      //     name: "Kane Doe",
-      //     addr: "",
-      //     photo: "",
-      //     title: "Title",
-      //     gender: "male",
-      //     fid: 1,
-      //     mid: 5,
-      //     pid: undefined,
-      //   },
-      //   {
-      //     id: 6,
-      //     name: "Test Doe",
-      //     addr: "",
-      //     photo: "",
-      //     title: "Title",
-      //     gender: "male",
-      //     pid: 2,
-      //   },
-      // ];
-
-//       var params = {
-//         data: jsonData /*Local variable or file path*/,
-//         search: false, //false
-//         container: "divFamily",
-//         template: "rounded", // "rounded" // "raised" // "tilted"
-//       };
-//       var tree = new Lineage(params);
-//       tree.load();
-//      </script>
-//   </body>
-//  </html> -->
-
-<!--  <html>
-  <head>
-    <script src="/lineage.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
-    <link rel="stylesheet" href="/lineage.min.css" />
-  </head>
-  <body>
-    <div id="divFamily"></div>
-    <div id="test"></div>
-    <script src="/lineage.min.js"></script>
-    <script>
-      var jsonData = [];
-      var params = {};
-
-      const paramsMeter = new URLSearchParams(window.location.search);
-      console.log("Tpken", paramsMeter.get("token"));
-      const ele = document.getElementById("test");
-      ele.innerHTML = paramsMeter.get("token");
-      console.log("Params", paramsMeter);
-
-      // Function to make the GET request and return a promise with the response data
-      function fetchData() {
-        var token =
-          "b3df9224bfe1011573ba644191a488b2bedd93ce4b6ae2f4626ff5f07fc84265ae218e87daf0db4d7a9674bf43d2aeb589fd4d0ed380ab1df7b81a6c3d1f5d8733831fdef0f00a30ed3efaab4f3a6e95ace8429a18ca1d8e19bf76268a11195255fe5c48031ebf33d52b85a70f016e758b7ce0554f6a8c3a891320f72eb3e186";
-
-        var headers = {
-          Authorization: "Bearer " + token,
-        };
-
-        return fetch(
-          "https://backend.my-roots.in/api/v2/relations/silverag2002@gmail.com",
-          { headers }
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("Data,", data);
-            jsonData = data.data.attributes.family;
-            loadFamilyTree();
-          })
-          .catch((error) => {
-            console.log("Error:", error);
-          });
-      }
-
-      // Function to load the family tree with the updated data
-      function loadFamilyTree() {
-        var params = {
-          data: jsonData,
-          search: false,
-          container: "divFamily",
-          template: "rounded",
-        };
-        console.log("Formation started", params);
-        var tree = new Lineage(params);
-        tree.load();
-      }
-
-      console.log("Start of script");
-
-      if (jsonData.length == 0) {
-        fetchData();
-      } else {
-        console.log("JSOn", jsonData);
-        loadFamilyTree();
-      }
-    </script>
-  </body>
-</html> -->
-
 <html>
   <head>
     <script src="/lineage.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
-    <link rel="stylesheet" href="/lineage.min.css" />
+    <link rel="stylesheet" href="./lineage.min.css" />
   </head>
   <body>
     <div id="divFamily"></div>
     <div id="test"></div>
-    <script src="/lineage.min.js"></script>
+    <script src="lineage.min.js"></script>
     <script>
       // var jsonData = [];
       var params = {};
@@ -281,7 +16,8 @@
 
       let finalOutput = [];
       let uniqueObjects = {};
-      var jsonData = [
+      var jsonData = [];
+      var input = [
         {
           spouseId: 5,
           user: {
@@ -441,22 +177,20 @@
       // Function to make the GET request and return a promise with the response data
       function fetchData() {
         var token =
-          "b3df9224bfe1011573ba644191a488b2bedd93ce4b6ae2f4626ff5f07fc84265ae218e87daf0db4d7a9674bf43d2aeb589fd4d0ed380ab1df7b81a6c3d1f5d8733831fdef0f00a30ed3efaab4f3a6e95ace8429a18ca1d8e19bf76268a11195255fe5c48031ebf33d52b85a70f016e758b7ce0554f6a8c3a891320f72eb3e186";
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTQsImlhdCI6MTY4ODY1MjIyMSwiZXhwIjoxNjkxMjQ0MjIxfQ.VDKrXaCJFlcvqA_R9BQyBrrCaSuEaH3SJoSDQZHBdVw";
 
         var headers = {
           Authorization: "Bearer " + token,
         };
 
-        return fetch(
-          "https://backend.my-roots.in/api/v2/relations/silverag2002@gmail.com",
-          { headers }
-        )
+        return fetch("http://localhost:1337/api/relation/tree", { headers })
           .then((response) => response.json())
           .then((data) => {
             console.log("Data,", data);
             // jsonData = data.data.attributes.family;
 
             check().then((data) => {
+              console.log("Entered params", data);
               data.forEach((obj) => {
                 if (!uniqueObjects[obj.id]) {
                   uniqueObjects[obj.id] = true;
@@ -487,7 +221,7 @@
 
       console.log("Start of script");
 
-      if (jsonData.length == 0) {
+      if (finalOutput.length == 0) {
         fetchData();
       } else {
         console.log("JSOn", jsonData);
