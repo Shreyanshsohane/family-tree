@@ -9,135 +9,191 @@
     <script>
       var jsonData = [
         {
-          id: 1,
-          pid: 2,
-          addr: "",
-          name: "Father",
-          photo: "",
-          title: "Title",
-          gender: "male",
+          spouseId: 5,
+          user: {
+            id: 1,
+            name: "Father Doe",
+            gender: "male",
+          },
         },
         {
-          id: 2,
-          pid: 1,
-          addr: "",
-          name: "Mother",
-          photo: "",
-          title: "Title",
-          gender: "female",
+          spouseId: 1,
+          user: {
+            id: 5,
+            name: "Mommy Doe",
+            gender: "female",
+          },
         },
         {
-          id: 3,
-          fid: 1,
-          mid: 2,
-          pid: 4,
-          addr: "",
-          name: "Daughter",
-          photo: "//unsplash.it/80/80",
-          title: "Title",
-          gender: "female",
+          parentId: 1,
+          spouseId: 6,
+          user: {
+            id: 2,
+            name: "Jane Doe",
+            gender: "female",
+          },
         },
         {
-          id: 4,
-          pid: 3,
-          addr: "",
-          name: "Son-in-Law",
-          photo: "",
-          title: "Title",
-          gender: "male",
+          parentId: 1,
+          user: {
+            id: 3,
+            name: "Kane Doe",
+            gender: "male",
+          },
         },
         {
-          id: 5,
-          fid: 4,
-          mid: 3,
-          addr: "",
-          name: "Son",
-          photo: "",
-          title: "Title",
-          gender: "male",
-          pid: "5ad52abd-5d67-4383-869b-0f8e1f9422fb",
+          parentId: 2,
+
+          user: {
+            id: 4,
+            name: "Jane's Daughter",
+            gender: "female",
+          },
         },
         {
-          id: 6,
-          fid: 4,
-          mid: 3,
-          pid: 11,
-          addr: "",
-          name: "Son2",
-          photo: "",
-          title: "Title",
-          gender: "male",
+          parentId: 6,
+
+          user: {
+            id: 4,
+            name: "Jane's Daughter",
+            gender: "female",
+          },
         },
         {
-          id: 7,
-          fid: 1,
-          mid: 2,
-          addr: "",
-          name: "Wife2",
-          photo: "",
-          title: "Title",
-          gender: "female",
+          parentId: 5,
+          spouseId: 6,
+          user: {
+            id: 2,
+            name: "Jane Doe",
+            gender: "female",
+          },
         },
         {
-          id: 8,
-          pid: 1,
-          addr: "",
-          name: "Test2",
-          photo: "",
-          title: "Title",
-          gender: "female",
+          parentId: 5,
+          user: {
+            id: 3,
+            name: "Kane Doe",
+            gender: "male",
+          },
         },
         {
-          id: 9,
-          fid: 1,
-          mid: 2,
-          addr: "",
-          name: "Indrajit",
-          photo: "",
-          title: "Rohit",
-          gender: "female",
-        },
-        {
-          id: 10,
-          fid: 1,
-          mid: 2,
-          addr: "",
-          name: "Nirmal Hui",
-          photo: "",
-          title: "New test",
-          gender: "female",
-        },
-        {
-          id: 11,
-          pid: 6,
-          addr: "",
-          name: "Hui Hui",
-          photo: "",
-          title: "New test",
-          gender: "female",
-        },
-        {
-          id: "5ad52abd-5d67-4383-869b-0f8e1f9422fb",
-          addr: "",
-          name: "Samay",
-          gender: "female",
-          photo: "Image-link",
-          title: "",
+          spouseId: 2,
+          user: {
+            id: 6,
+            name: "Test Doe",
+            gender: "male",
+          },
         },
       ];
-      var params = {
-        data: jsonData /*Local variable or file path*/,
-        search: false, //false
-        container: "divFamily",
-        template: "rounded", // "rounded" // "raised" // "tilted"
-      };
-      var tree = new Lineage(params);
-      tree.load();
-    </script>
-  </body>
-</html> -->
+      // var jsonData = [
+      //   {
+      //     id: 1,
+      //     name: "Father Doe",
+      //     addr: "",
+      //     photo: "",
+      //     title: "Title",
+      //     gender: "male",
+      //     pid: 5,
+      //   },
+      //   {
+      //     id: 5,
+      //     name: "Mommy Doe",
+      //     addr: "",
+      //     photo: "",
+      //     title: "Title",
+      //     gender: "female",
+      //     pid: 1,
+      //   },
+      //   {
+      //     id: 2,
+      //     name: "Jane Doe",
+      //     addr: "",
+      //     photo: "",
+      //     title: "Title",
+      //     gender: "female",
+      //     fid: 1,
+      //     mid: 5,
+      //     pid: 6,
+      //   },
+      //   {
+      //     id: 3,
+      //     name: "Kane Doe",
+      //     addr: "",
+      //     photo: "",
+      //     title: "Title",
+      //     gender: "male",
+      //     fid: 1,
+      //     mid: 5,
+      //     pid: undefined,
+      //   },
+      //   {
+      //     id: 4,
+      //     name: "Jane's Daughter",
+      //     addr: "",
+      //     photo: "",
+      //     title: "Title",
+      //     gender: "female",
+      //     fid: 1,
+      //     mid: 5,
+      //     pid: undefined,
+      //   },
+      //   {
+      //     id: 4,
+      //     name: "Jane's Daughter",
+      //     addr: "",
+      //     photo: "",
+      //     title: "Title",
+      //     gender: "female",
+      //     fid: 1,
+      //     mid: 5,
+      //     pid: undefined,
+      //   },
+      //   {
+      //     id: 2,
+      //     name: "Jane Doe",
+      //     addr: "",
+      //     photo: "",
+      //     title: "Title",
+      //     gender: "female",
+      //     fid: 1,
+      //     mid: 5,
+      //     pid: 6,
+      //   },
+      //   {
+      //     id: 3,
+      //     name: "Kane Doe",
+      //     addr: "",
+      //     photo: "",
+      //     title: "Title",
+      //     gender: "male",
+      //     fid: 1,
+      //     mid: 5,
+      //     pid: undefined,
+      //   },
+      //   {
+      //     id: 6,
+      //     name: "Test Doe",
+      //     addr: "",
+      //     photo: "",
+      //     title: "Title",
+      //     gender: "male",
+      //     pid: 2,
+      //   },
+      // ];
 
-<html>
+//       var params = {
+//         data: jsonData /*Local variable or file path*/,
+//         search: false, //false
+//         container: "divFamily",
+//         template: "rounded", // "rounded" // "raised" // "tilted"
+//       };
+//       var tree = new Lineage(params);
+//       tree.load();
+//      </script>
+//   </body>
+//  </html> -->
+
+<!--  <html>
   <head>
     <script src="/lineage.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -186,6 +242,240 @@
       function loadFamilyTree() {
         var params = {
           data: jsonData,
+          search: false,
+          container: "divFamily",
+          template: "rounded",
+        };
+        console.log("Formation started", params);
+        var tree = new Lineage(params);
+        tree.load();
+      }
+
+      console.log("Start of script");
+
+      if (jsonData.length == 0) {
+        fetchData();
+      } else {
+        console.log("JSOn", jsonData);
+        loadFamilyTree();
+      }
+    </script>
+  </body>
+</html> -->
+
+<html>
+  <head>
+    <script src="/lineage.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+    <link rel="stylesheet" href="/lineage.min.css" />
+  </head>
+  <body>
+    <div id="divFamily"></div>
+    <div id="test"></div>
+    <script src="/lineage.min.js"></script>
+    <script>
+      // var jsonData = [];
+      var params = {};
+      let outputArr = [];
+
+      let finalOutput = [];
+      let uniqueObjects = {};
+      var jsonData = [
+        {
+          spouseId: 5,
+          user: {
+            id: 1,
+            name: "Father Doe",
+            gender: "male",
+          },
+        },
+        {
+          spouseId: 1,
+          user: {
+            id: 5,
+            name: "Mommy Doe",
+            gender: "female",
+          },
+        },
+        {
+          parentId: 1,
+          spouseId: 6,
+          user: {
+            id: 2,
+            name: "Jane Doe",
+            gender: "female",
+          },
+        },
+        {
+          parentId: 1,
+          user: {
+            id: 3,
+            name: "Kane Doe",
+            gender: "male",
+          },
+        },
+        {
+          parentId: 2,
+
+          user: {
+            id: 4,
+            name: "Jane's Daughter",
+            gender: "female",
+          },
+        },
+        {
+          parentId: 6,
+
+          user: {
+            id: 4,
+            name: "Jane's Daughter",
+            gender: "female",
+          },
+        },
+        {
+          parentId: 5,
+          spouseId: 6,
+          user: {
+            id: 2,
+            name: "Jane Doe",
+            gender: "female",
+          },
+        },
+        {
+          parentId: 5,
+          user: {
+            id: 3,
+            name: "Kane Doe",
+            gender: "male",
+          },
+        },
+        {
+          spouseId: 2,
+          user: {
+            id: 6,
+            name: "Test Doe",
+            gender: "male",
+          },
+        },
+      ];
+
+      async function genderFinder(id) {
+        console.log("id received", id);
+        for (let j = 0; j < input.length; j++) {
+          if (input[j].user.id == id) {
+            console.log("Indisde gender", input[j].user.gender);
+            return input[j].user.gender;
+          }
+        }
+        return "male";
+      }
+
+      async function findExistingMember(id) {
+        for (let k = 0; k < outputArr.length; k++) {
+          console.log("OUtside check", outputArr[k]);
+          console.log("ID", id);
+          if (outputArr[k].id == id) {
+            console.log("Inside check", outputArr[k]);
+            return outputArr[k];
+          }
+        }
+        return 0;
+      }
+      async function check() {
+        for (let i = 0; i < input.length; i++) {
+          let member = input[i];
+          let existFinder = await findExistingMember(member.user.id);
+
+          var templateMember;
+          let template = {
+            //   id: undefined,
+            //   fid: undefined,
+            //   mid: undefined,
+            //   pid: undefined,
+            addr: "",
+            name: "",
+            photo: "",
+            title: "Title",
+            gender: "",
+          };
+
+          console.log("Exist finder 123", existFinder);
+          if (existFinder == 0) {
+            console.log("Template", template);
+            templateMember = template;
+          } else {
+            console.log("Template retreived", existFinder);
+            templateMember = existFinder;
+          }
+
+          console.log("Exist finder 456", existFinder);
+          templateMember.id = member.user.id;
+          templateMember.name = member.user.name;
+          templateMember.gender = member.user.gender;
+          if (member.spouseId) {
+            templateMember.pid = member.spouseId;
+          }
+          if (member.parentId) {
+            let genderResult = await genderFinder(member.parentId);
+            if (genderResult == "male") {
+              templateMember.fid = member.parentId;
+              console.log("Father case", member.parentId, templateMember);
+            } else {
+              templateMember.mid = member.parentId;
+              console.log("Mother case", member.parentId, templateMember);
+            }
+          }
+          console.log("MEmber one", templateMember);
+          outputArr.push(templateMember);
+        }
+        return outputArr;
+      }
+
+      const paramsMeter = new URLSearchParams(window.location.search);
+      console.log("Tpken", paramsMeter.get("token"));
+      const ele = document.getElementById("test");
+      ele.innerHTML = paramsMeter.get("token");
+      console.log("Params", paramsMeter);
+
+      // Function to make the GET request and return a promise with the response data
+      function fetchData() {
+        var token =
+          "b3df9224bfe1011573ba644191a488b2bedd93ce4b6ae2f4626ff5f07fc84265ae218e87daf0db4d7a9674bf43d2aeb589fd4d0ed380ab1df7b81a6c3d1f5d8733831fdef0f00a30ed3efaab4f3a6e95ace8429a18ca1d8e19bf76268a11195255fe5c48031ebf33d52b85a70f016e758b7ce0554f6a8c3a891320f72eb3e186";
+
+        var headers = {
+          Authorization: "Bearer " + token,
+        };
+
+        return fetch(
+          "https://backend.my-roots.in/api/v2/relations/silverag2002@gmail.com",
+          { headers }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Data,", data);
+            // jsonData = data.data.attributes.family;
+
+            check().then((data) => {
+              data.forEach((obj) => {
+                if (!uniqueObjects[obj.id]) {
+                  uniqueObjects[obj.id] = true;
+                  finalOutput.push(obj);
+                }
+              });
+              console.log("Check", finalOutput);
+              loadFamilyTree();
+            });
+          })
+          .catch((error) => {
+            console.log("Error:", error);
+          });
+      }
+
+      // Function to load the family tree with the updated data
+      function loadFamilyTree() {
+        var params = {
+          data: finalOutput,
           search: false,
           container: "divFamily",
           template: "rounded",
