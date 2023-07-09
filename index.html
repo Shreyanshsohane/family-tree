@@ -17,82 +17,143 @@
       let finalOutput = [];
       let uniqueObjects = {};
       var jsonData = [];
-      var input = [
-        {
-          spouseId: 5,
-          user: {
-            id: 1,
-            name: "Father Doe",
-            gender: "male",
-          },
-        },
-        {
-          spouseId: 1,
-          user: {
-            id: 5,
-            name: "Mommy Doe",
-            gender: "female",
-          },
-        },
-        {
-          parentId: 1,
-          spouseId: 6,
-          user: {
-            id: 2,
-            name: "Jane Doe",
-            gender: "female",
-          },
-        },
-        {
-          parentId: 1,
-          user: {
-            id: 3,
-            name: "Kane Doe",
-            gender: "male",
-          },
-        },
-        {
-          parentId: 2,
+      // var input = [
+      //   {
+      //     spouseId: 5,
+      //     user: {
+      //       id: 1,
+      //       name: "Father Doe",
+      //       gender: "male",
+      //     },
+      //   },
+      //   {
+      //     spouseId: 1,
+      //     user: {
+      //       id: 5,
+      //       name: "Mommy Doe",
+      //       gender: "female",
+      //     },
+      //   },
+      //   {
+      //     parentId: 1,
+      //     spouseId: 6,
+      //     user: {
+      //       id: 2,
+      //       name: "Jane Doe",
+      //       gender: "female",
+      //     },
+      //   },
+      //   {
+      //     parentId: 1,
+      //     user: {
+      //       id: 3,
+      //       name: "Kane Doe",
+      //       gender: "male",
+      //     },
+      //   },
+      //   {
+      //     parentId: 2,
 
-          user: {
-            id: 4,
-            name: "Jane's Daughter",
-            gender: "female",
-          },
-        },
-        {
-          parentId: 6,
+      //     user: {
+      //       id: 4,
+      //       name: "Jane's Daughter",
+      //       gender: "female",
+      //     },
+      //   },
+      //   {
+      //     parentId: 6,
 
-          user: {
-            id: 4,
-            name: "Jane's Daughter",
-            gender: "female",
-          },
+      //     user: {
+      //       id: 4,
+      //       name: "Jane's Daughter",
+      //       gender: "female",
+      //     },
+      //   },
+      //   {
+      //     parentId: 5,
+      //     spouseId: 6,
+      //     user: {
+      //       id: 2,
+      //       name: "Jane Doe",
+      //       gender: "female",
+      //     },
+      //   },
+      //   {
+      //     parentId: 5,
+      //     user: {
+      //       id: 3,
+      //       name: "Kane Doe",
+      //       gender: "male",
+      //     },
+      //   },
+      //   {
+      //     spouseId: 2,
+      //     user: {
+      //       id: 6,
+      //       name: "Test Doe",
+      //       gender: "male",
+      //     },
+      //   },
+      // ];
+      var input = [];
+      var checkTest = [
+        {
+          addr: "",
+          name: "Father Doe",
+          photo: "",
+          title: "Title",
+          gender: "male",
+          id: 1,
+          pid: 5,
         },
         {
-          parentId: 5,
-          spouseId: 6,
-          user: {
-            id: 2,
-            name: "Jane Doe",
-            gender: "female",
-          },
+          addr: "",
+          name: "Mommy Doe",
+          photo: "",
+          title: "Title",
+          gender: "female",
+          id: 5,
+          pid: 1,
         },
         {
-          parentId: 5,
-          user: {
-            id: 3,
-            name: "Kane Doe",
-            gender: "male",
-          },
+          addr: "",
+          name: "Jane Doe",
+          photo: "",
+          title: "Title",
+          gender: "female",
+          id: 2,
+          pid: 6,
+          fid: 1,
+          mid: 5,
         },
         {
-          spouseId: 2,
-          user: {
-            id: 6,
-            name: "Test Doe",
-            gender: "male",
-          },
+          addr: "",
+          name: "Kane Doe",
+          photo: "",
+          title: "Title",
+          gender: "male",
+          id: 3,
+          fid: 1,
+          mid: 5,
+        },
+        {
+          addr: "",
+          name: "Jane's Daughter",
+          photo: "",
+          title: "Title",
+          gender: "female",
+          id: 4,
+          mid: 2,
+          fid: 6,
+        },
+        {
+          addr: "",
+          name: "Test Doe",
+          photo: "",
+          title: "Title",
+          gender: "male",
+          id: 6,
+          pid: 2,
         },
       ];
 
@@ -149,8 +210,8 @@
           templateMember.id = member.user.id;
           templateMember.name = member.user.name;
           templateMember.gender = member.user.gender;
-          if (member.spouseId) {
-            templateMember.pid = member.spouseId;
+          if (member.siblingId) {
+            templateMember.pid = member.siblingId;
           }
           if (member.parentId) {
             let genderResult = await genderFinder(member.parentId);
@@ -170,23 +231,28 @@
 
       const paramsMeter = new URLSearchParams(window.location.search);
       console.log("Tpken", paramsMeter.get("token"));
+      var finalToken = paramsMeter.get("token");
       const ele = document.getElementById("test");
       ele.innerHTML = paramsMeter.get("token");
       console.log("Params", paramsMeter);
 
       // Function to make the GET request and return a promise with the response data
       function fetchData() {
-        var token =
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTQsImlhdCI6MTY4ODY1MjIyMSwiZXhwIjoxNjkxMjQ0MjIxfQ.VDKrXaCJFlcvqA_R9BQyBrrCaSuEaH3SJoSDQZHBdVw";
+        var token = finalToken
+          ? finalToken
+          : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTQsImlhdCI6MTY4ODY1MjIyMSwiZXhwIjoxNjkxMjQ0MjIxfQ.VDKrXaCJFlcvqA_R9BQyBrrCaSuEaH3SJoSDQZHBdVw";
 
         var headers = {
           Authorization: "Bearer " + token,
         };
 
-        return fetch("http://localhost:1337/api/relation/tree", { headers })
+        return fetch("https://backend.my-roots.in/api/relation/tree", {
+          headers,
+        })
           .then((response) => response.json())
-          .then((data) => {
-            console.log("Data,", data);
+          .then((data1) => {
+            console.log("Data,", data1);
+            input = data1;
             // jsonData = data.data.attributes.family;
 
             check().then((data) => {
@@ -197,7 +263,12 @@
                   finalOutput.push(obj);
                 }
               });
+              for (let i = 0; i < checkTest.length; i++) {
+                finalOutput[i] = checkTest[i];
+              }
+
               console.log("Check", finalOutput);
+
               loadFamilyTree();
             });
           })
