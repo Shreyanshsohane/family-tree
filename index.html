@@ -554,67 +554,67 @@
       // Function to make the GET request and return a promise with the response data
       function fetchData() {
         var token =
-          // finalToken?.length > 10
-          // ? finalToken
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTQsImlhdCI6MTY4ODY1MjIyMSwiZXhwIjoxNjkxMjQ0MjIxfQ.VDKrXaCJFlcvqA_R9BQyBrrCaSuEaH3SJoSDQZHBdVw";
+          finalToken?.length > 10
+            ? finalToken
+            : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTE0LCJpYXQiOjE2ODkwMDUzNTcsImV4cCI6MTY5MTU5NzM1N30.yCGZ2ozpyV4V4YFzIX41HrxwPjPrRHotrkM6HwMEF3Y";
         console.log("Token which is being used", token);
         var headers = {
           Authorization: "Bearer " + token,
         };
 
-        // return fetch("http://localhost:1337/api/relation/tree", {
-        //   headers,
-        // })
-        //   .then((response) => response.json())
-        //   .then((data1) => {
-        //     console.log("Data,", data1);
-        input = data2;
-        // jsonData = data.data.attributes.family;
-        const uniqueData = Array.from(new Set(data2.map(JSON.stringify))).map(
-          JSON.parse
-        );
-        input = uniqueData;
-        console.log("Uniques data vefore check", uniqueData);
-        let firstMemberId = input[0].user.id;
-        window.localStorage.setItem(
-          "changed_id",
-          JSON.stringify(firstMemberId)
-        );
-        for (let i = 0; i < input.length; i++) {
-          if (input[i].user.id == firstMemberId) {
-            input[i].user.id = 1;
-          }
-          if (input[i].spouseId == firstMemberId) {
-            input[i].spouseId = 1;
-          }
-          if (input[i].parentId == firstMemberId) {
-            input[i].parentId = 1;
-          }
-        }
-        check().then((data) => {
-          console.log("Entered params", data);
-          // data.forEach((obj) => {
-          //   if (!uniqueObjects[obj.id]) {
-          //     uniqueObjects[obj.id] = true;
-          //     finalOutput.push(obj);
-          //   }
-          // });
-          // data[0].id = 2;
+        return fetch("https://backend.my-roots.in/api/relation/tree", {
+          headers,
+        })
+          .then((response) => response.json())
+          .then((data1) => {
+            console.log("Data,", data1);
+            input = data1;
+            // jsonData = data.data.attributes.family;
+            const uniqueData = Array.from(
+              new Set(data1.map(JSON.stringify))
+            ).map(JSON.parse);
+            input = uniqueData;
+            console.log("Uniques data vefore check", uniqueData);
+            let firstMemberId = input[0].user.id;
+            window.localStorage.setItem(
+              "changed_id",
+              JSON.stringify(firstMemberId)
+            );
+            for (let i = 0; i < input.length; i++) {
+              if (input[i].user.id == firstMemberId) {
+                input[i].user.id = 1;
+              }
+              if (input[i].spouseId == firstMemberId) {
+                input[i].spouseId = 1;
+              }
+              if (input[i].parentId == firstMemberId) {
+                input[i].parentId = 1;
+              }
+            }
+            check().then((data) => {
+              console.log("Entered params", data);
+              // data.forEach((obj) => {
+              //   if (!uniqueObjects[obj.id]) {
+              //     uniqueObjects[obj.id] = true;
+              //     finalOutput.push(obj);
+              //   }
+              // });
+              // data[0].id = 2;
 
-          console.log("Uniques data", uniqueData);
-          // console.log("Final output ", finalOutput);
-          // for (let i = 0; i < checkTest.length; i++) {
-          //   finalOutput[i] = checkTest[i];
-          // }
+              console.log("Uniques data", uniqueData);
+              // console.log("Final output ", finalOutput);
+              // for (let i = 0; i < checkTest.length; i++) {
+              //   finalOutput[i] = checkTest[i];
+              // }
 
-          // console.log("Check", finalOutput);
-          finalOutput = data;
-          loadFamilyTree();
-        });
-        // })
-        // .catch((error) => {
-        //   console.log("Error:", error);
-        // });
+              // console.log("Check", finalOutput);
+              finalOutput = data;
+              loadFamilyTree();
+            });
+          })
+          .catch((error) => {
+            console.log("Error:", error);
+          });
       }
 
       // Function to load the family tree with the updated data
