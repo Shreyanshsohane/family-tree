@@ -472,6 +472,38 @@
         },
       ];
 
+      var finalCheck = [
+        {
+          addr: "",
+          gender: "FEMALE",
+          id: 120,
+          name: "QWERTCHECKQWERT",
+          photo: "",
+          pid: 1,
+          title: "Title",
+        },
+        {
+          addr: "",
+          fid: 1,
+          gender: "MALE",
+          id: 11,
+          mid: 120,
+          name: "Shreyansh SohaneSohane",
+          photo: "",
+          title: "Title",
+        },
+
+        {
+          addr: "",
+          gender: "MALE",
+          id: 1,
+          name: "QWERTQWERT",
+          photo: "",
+          pid: 120,
+          title: "Title",
+        },
+      ];
+
       async function genderFinder(id) {
         console.log("id received", id);
         for (let j = 0; j < input.length; j++) {
@@ -621,7 +653,7 @@
       // Function to load the family tree with the updated data
       function loadFamilyTree() {
         var params = {
-          data: finalOutput,
+          data: finalCheck,
           search: false,
           container: "divFamily",
           template: "rounded",
