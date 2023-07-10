@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
   <head>
     <script src="/lineage.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -238,15 +238,16 @@
 
       // Function to make the GET request and return a promise with the response data
       function fetchData() {
-        var token = finalToken
-          ? finalToken
-          : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTQsImlhdCI6MTY4ODY1MjIyMSwiZXhwIjoxNjkxMjQ0MjIxfQ.VDKrXaCJFlcvqA_R9BQyBrrCaSuEaH3SJoSDQZHBdVw";
-
+        var token =
+          // finalToken?.length > 10
+          // ? finalToken
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTQsImlhdCI6MTY4ODY1MjIyMSwiZXhwIjoxNjkxMjQ0MjIxfQ.VDKrXaCJFlcvqA_R9BQyBrrCaSuEaH3SJoSDQZHBdVw";
+        console.log("Token which is being used", token);
         var headers = {
           Authorization: "Bearer " + token,
         };
 
-        return fetch("https://backend.my-roots.in/api/relation/tree", {
+        return fetch("http://localhost:1337/api/relation/tree", {
           headers,
         })
           .then((response) => response.json())
@@ -257,12 +258,13 @@
 
             check().then((data) => {
               console.log("Entered params", data);
-              data.forEach((obj) => {
-                if (!uniqueObjects[obj.id]) {
-                  uniqueObjects[obj.id] = true;
-                  finalOutput.push(obj);
-                }
-              });
+              // data.forEach((obj) => {
+              //   if (!uniqueObjects[obj.id]) {
+              //     uniqueObjects[obj.id] = true;
+              //     finalOutput.push(obj);
+              //   }
+              // });
+              console.log("Final output ", finalOutput);
               for (let i = 0; i < checkTest.length; i++) {
                 finalOutput[i] = checkTest[i];
               }
@@ -275,6 +277,344 @@
           .catch((error) => {
             console.log("Error:", error);
           });
+      }
+
+      // Function to load the family tree with the updated data
+      function loadFamilyTree() {
+        var params = {
+          data: finalOutput,
+          search: false,
+          container: "divFamily",
+          template: "rounded",
+        };
+        console.log("Formation started", params);
+        var tree = new Lineage(params);
+        tree.load();
+      }
+
+      console.log("Start of script");
+
+      if (finalOutput.length == 0) {
+        fetchData();
+      } else {
+        console.log("JSOn", jsonData);
+        loadFamilyTree();
+      }
+    </script>
+  </body>
+</html> -->
+
+<html>
+  <head>
+    <script src="/lineage.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+    <link rel="stylesheet" href="./lineage.min.css" />
+  </head>
+  <body>
+    <div id="divFamily"></div>
+    <div id="test"></div>
+    <script src="lineage.min.js"></script>
+    <script>
+      // var jsonData = [];
+      var params = {};
+      let outputArr = [];
+
+      let finalOutput = [];
+      let uniqueObjects = {};
+      var jsonData = [];
+      // var input = [
+      //   {
+      //     spouseId: 5,
+      //     user: {
+      //       id: 1,
+      //       name: "Father Doe",
+      //       gender: "male",
+      //     },
+      //   },
+      //   {
+      //     spouseId: 1,
+      //     user: {
+      //       id: 5,
+      //       name: "Mommy Doe",
+      //       gender: "female",
+      //     },
+      //   },
+      //   {
+      //     parentId: 1,
+      //     spouseId: 6,
+      //     user: {
+      //       id: 2,
+      //       name: "Jane Doe",
+      //       gender: "female",
+      //     },
+      //   },
+      //   {
+      //     parentId: 1,
+      //     user: {
+      //       id: 3,
+      //       name: "Kane Doe",
+      //       gender: "male",
+      //     },
+      //   },
+      //   {
+      //     parentId: 2,
+
+      //     user: {
+      //       id: 4,
+      //       name: "Jane's Daughter",
+      //       gender: "female",
+      //     },
+      //   },
+      //   {
+      //     parentId: 6,
+
+      //     user: {
+      //       id: 4,
+      //       name: "Jane's Daughter",
+      //       gender: "female",
+      //     },
+      //   },
+      //   {
+      //     parentId: 5,
+      //     spouseId: 6,
+      //     user: {
+      //       id: 2,
+      //       name: "Jane Doe",
+      //       gender: "female",
+      //     },
+      //   },
+      //   {
+      //     parentId: 5,
+      //     user: {
+      //       id: 3,
+      //       name: "Kane Doe",
+      //       gender: "male",
+      //     },
+      //   },
+      //   {
+      //     spouseId: 2,
+      //     user: {
+      //       id: 6,
+      //       name: "Test Doe",
+      //       gender: "male",
+      //     },
+      //   },
+      // ];
+      var input = [];
+      var data2 = [
+        {
+          user: {
+            id: 110,
+            name: "ShreyanshSohane",
+            gender: "MALE",
+          },
+        },
+      ];
+      var checkTest = [
+        {
+          addr: "",
+          name: "Father Doe",
+          photo: "",
+          title: "Title",
+          gender: "male",
+          id: 1,
+          pid: 85,
+        },
+        {
+          addr: "",
+          name: "Mommy Doe",
+          photo: "",
+          title: "Title",
+          gender: "female",
+          id: 85,
+          pid: 1,
+        },
+        {
+          addr: "",
+          name: "Jane Doe",
+          photo: "",
+          title: "Title",
+          gender: "female",
+          id: 86,
+          pid: 87,
+          fid: 1,
+          mid: 85,
+        },
+        {
+          addr: "",
+          name: "Kane Doe",
+          photo: "",
+          title: "Title",
+          gender: "male",
+          id: 88,
+          fid: 1,
+          mid: 85,
+        },
+        {
+          addr: "",
+          name: "Jane's Daughter",
+          photo: "",
+          title: "Title",
+          gender: "female",
+          id: 91,
+          mid: 86,
+          fid: 87,
+        },
+        {
+          addr: "",
+          name: "Test Doe",
+          photo: "",
+          title: "Title",
+          gender: "male",
+          id: 87,
+          pid: 86,
+        },
+      ];
+
+      async function genderFinder(id) {
+        console.log("id received", id);
+        for (let j = 0; j < input.length; j++) {
+          if (input[j].user.id == id) {
+            console.log("Indisde gender", input[j].user.gender);
+            return input[j].user.gender;
+          }
+        }
+        return "male";
+      }
+
+      async function findExistingMember(id) {
+        for (let k = 0; k < outputArr.length; k++) {
+          console.log("OUtside check", outputArr[k]);
+          console.log("ID", id);
+          if (outputArr[k].id == id) {
+            console.log("Inside check", outputArr[k]);
+            return outputArr[k];
+          }
+        }
+        return 0;
+      }
+      async function check() {
+        for (let i = 0; i < input.length; i++) {
+          let member = input[i];
+          let existFinder = await findExistingMember(member.user.id);
+
+          var templateMember;
+          let template = {
+            //   id: undefined,
+            //   fid: undefined,
+            //   mid: undefined,
+            //   pid: undefined,
+            addr: "",
+            name: "",
+            photo: "",
+            title: "Title",
+            gender: "",
+          };
+
+          console.log("Exist finder 123", existFinder);
+          if (existFinder == 0) {
+            console.log("Template", template);
+            templateMember = template;
+          } else {
+            console.log("Template retreived", existFinder);
+            templateMember = existFinder;
+          }
+
+          console.log("Exist finder 456", existFinder);
+          templateMember.id = member.user.id;
+          templateMember.name = member.user.name;
+          templateMember.gender = member.user.gender;
+          if (member.siblingId) {
+            templateMember.pid = member.siblingId;
+          }
+          if (member.parentId) {
+            let genderResult = await genderFinder(member.parentId);
+            if (genderResult == "male") {
+              templateMember.fid = member.parentId;
+              console.log("Father case", member.parentId, templateMember);
+            } else {
+              templateMember.mid = member.parentId;
+              console.log("Mother case", member.parentId, templateMember);
+            }
+          }
+          console.log("MEmber one", templateMember);
+          outputArr.push(templateMember);
+        }
+        return outputArr;
+      }
+
+      const paramsMeter = new URLSearchParams(window.location.search);
+      console.log("Tpken", paramsMeter.get("token"));
+      var finalToken = paramsMeter.get("token");
+      const ele = document.getElementById("test");
+      ele.innerHTML = paramsMeter.get("token");
+      console.log("Params", paramsMeter);
+
+      // Function to make the GET request and return a promise with the response data
+      function fetchData() {
+        var token =
+          // finalToken?.length > 10
+          // ? finalToken
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTQsImlhdCI6MTY4ODY1MjIyMSwiZXhwIjoxNjkxMjQ0MjIxfQ.VDKrXaCJFlcvqA_R9BQyBrrCaSuEaH3SJoSDQZHBdVw";
+        console.log("Token which is being used", token);
+        var headers = {
+          Authorization: "Bearer " + token,
+        };
+
+        // return fetch("http://localhost:1337/api/relation/tree", {
+        //   headers,
+        // })
+        //   .then((response) => response.json())
+        //   .then((data1) => {
+        //     console.log("Data,", data1);
+        input = data2;
+        // jsonData = data.data.attributes.family;
+        const uniqueData = Array.from(new Set(data2.map(JSON.stringify))).map(
+          JSON.parse
+        );
+        input = uniqueData;
+        console.log("Uniques data vefore check", uniqueData);
+        let firstMemberId = input[0].user.id;
+        window.localStorage.setItem(
+          "changed_id",
+          JSON.stringify(firstMemberId)
+        );
+        for (let i = 0; i < input.length; i++) {
+          if (input[i].user.id == firstMemberId) {
+            input[i].user.id = 1;
+          }
+          if (input[i].spouseId == firstMemberId) {
+            input[i].spouseId = 1;
+          }
+          if (input[i].parentId == firstMemberId) {
+            input[i].parentId = 1;
+          }
+        }
+        check().then((data) => {
+          console.log("Entered params", data);
+          // data.forEach((obj) => {
+          //   if (!uniqueObjects[obj.id]) {
+          //     uniqueObjects[obj.id] = true;
+          //     finalOutput.push(obj);
+          //   }
+          // });
+          // data[0].id = 2;
+
+          console.log("Uniques data", uniqueData);
+          // console.log("Final output ", finalOutput);
+          // for (let i = 0; i < checkTest.length; i++) {
+          //   finalOutput[i] = checkTest[i];
+          // }
+
+          // console.log("Check", finalOutput);
+          finalOutput = data;
+          loadFamilyTree();
+        });
+        // })
+        // .catch((error) => {
+        //   console.log("Error:", error);
+        // });
       }
 
       // Function to load the family tree with the updated data
