@@ -633,6 +633,7 @@
       console.log("Start of script");
 
       if (finalOutput.length == 0) {
+        window.localStorage.clear();
         fetchData();
       } else {
         console.log("JSOn", jsonData);
