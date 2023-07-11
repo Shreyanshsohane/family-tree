@@ -2,7 +2,7 @@ var jsonData = [
   {
     id: 1,
     pid: 2,
-    gender: "male",
+    gender: "MALE",
     title: "Title",
     name: "Father",
     photo: "",
@@ -34,7 +34,7 @@ var jsonData = [
   {
     id: 4,
     pid: 3,
-    gender: "male",
+    gender: "MALE",
     title: "Title",
     name: "Son-in-Law",
     photo: "",

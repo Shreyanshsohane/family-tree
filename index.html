@@ -23,7 +23,7 @@
       //     user: {
       //       id: 1,
       //       name: "Father Doe",
-      //       gender: "male",
+      //       gender: "MALE",
       //     },
       //   },
       //   {
@@ -48,7 +48,7 @@
       //     user: {
       //       id: 3,
       //       name: "Kane Doe",
-      //       gender: "male",
+      //       gender: "MALE",
       //     },
       //   },
       //   {
@@ -83,7 +83,7 @@
       //     user: {
       //       id: 3,
       //       name: "Kane Doe",
-      //       gender: "male",
+      //       gender: "MALE",
       //     },
       //   },
       //   {
@@ -91,7 +91,7 @@
       //     user: {
       //       id: 6,
       //       name: "Test Doe",
-      //       gender: "male",
+      //       gender: "MALE",
       //     },
       //   },
       // ];
@@ -102,7 +102,7 @@
           name: "Father Doe",
           photo: "",
           title: "Title",
-          gender: "male",
+          gender: "MALE",
           id: 1,
           pid: 85,
         },
@@ -131,7 +131,7 @@
           name: "Kane Doe",
           photo: "",
           title: "Title",
-          gender: "male",
+          gender: "MALE",
           id: 88,
           fid: 1,
           mid: 85,
@@ -151,7 +151,7 @@
           name: "Test Doe",
           photo: "",
           title: "Title",
-          gender: "male",
+          gender: "MALE",
           id: 87,
           pid: 86,
         },
@@ -165,7 +165,7 @@
             return input[j].user.gender;
           }
         }
-        return "male";
+        return "MALE";
       }
 
       async function findExistingMember(id) {
@@ -215,7 +215,7 @@
           }
           if (member.parentId) {
             let genderResult = await genderFinder(member.parentId);
-            if (genderResult == "male") {
+            if (genderResult == "MALE") {
               templateMember.fid = member.parentId;
               console.log("Father case", member.parentId, templateMember);
             } else {
@@ -329,7 +329,7 @@
       //     user: {
       //       id: 1,
       //       name: "Father Doe",
-      //       gender: "male",
+      //       gender: "MALE",
       //     },
       //   },
       //   {
@@ -354,7 +354,7 @@
       //     user: {
       //       id: 3,
       //       name: "Kane Doe",
-      //       gender: "male",
+      //       gender: "MALE",
       //     },
       //   },
       //   {
@@ -389,7 +389,7 @@
       //     user: {
       //       id: 3,
       //       name: "Kane Doe",
-      //       gender: "male",
+      //       gender: "MALE",
       //     },
       //   },
       //   {
@@ -397,7 +397,7 @@
       //     user: {
       //       id: 6,
       //       name: "Test Doe",
-      //       gender: "male",
+      //       gender: "MALE",
       //     },
       //   },
       // ];
@@ -417,7 +417,7 @@
           name: "Father Doe",
           photo: "",
           title: "Title",
-          gender: "male",
+          gender: "MALE",
           id: 1,
           pid: 85,
         },
@@ -446,7 +446,7 @@
           name: "Kane Doe",
           photo: "",
           title: "Title",
-          gender: "male",
+          gender: "MALE",
           id: 88,
           fid: 1,
           mid: 85,
@@ -466,7 +466,7 @@
           name: "Test Doe",
           photo: "",
           title: "Title",
-          gender: "male",
+          gender: "MALE",
           id: 87,
           pid: 86,
         },
@@ -479,7 +479,7 @@
           id: 120,
           name: "QWERTCHECKQWERT",
           photo: "",
-          pid: 1,
+          // pid: 1,
           title: "Title",
         },
         {
@@ -499,7 +499,7 @@
           id: 1,
           name: "QWERTQWERT",
           photo: "",
-          pid: 120,
+          // pid: 120,
           title: "Title",
         },
       ];
@@ -512,7 +512,7 @@
             return input[j].user.gender;
           }
         }
-        return "male";
+        return "MALE";
       }
 
       async function findExistingMember(id) {
@@ -562,7 +562,7 @@
           }
           if (member.parentId) {
             let genderResult = await genderFinder(member.parentId);
-            if (genderResult == "male") {
+            if (genderResult == "MALE") {
               templateMember.fid = member.parentId;
               console.log("Father case", member.parentId, templateMember);
             } else {
@@ -600,18 +600,19 @@
           .then((response) => response.json())
           .then((data1) => {
             console.log("Data,", data1);
-            input = data1;
+            input = data1.tree;
             // jsonData = data.data.attributes.family;
             const uniqueData = Array.from(
-              new Set(data1.map(JSON.stringify))
+              new Set(data1.tree.map(JSON.stringify))
             ).map(JSON.parse);
             input = uniqueData;
             console.log("Uniques data vefore check", uniqueData);
-            let firstMemberId = input[0].user.id;
+            let firstMemberId = data1.ancestorId;
             window.localStorage.setItem(
               "changed_id",
               JSON.stringify(firstMemberId)
             );
+
             for (let i = 0; i < input.length; i++) {
               if (input[i].user.id == firstMemberId) {
                 input[i].user.id = 1;
@@ -625,22 +626,100 @@
             }
             check().then((data) => {
               console.log("Entered params", data);
-              // data.forEach((obj) => {
-              //   if (!uniqueObjects[obj.id]) {
-              //     uniqueObjects[obj.id] = true;
-              //     finalOutput.push(obj);
-              //   }
-              // });
+              data.forEach((obj) => {
+                if (!uniqueObjects[obj.id]) {
+                  uniqueObjects[obj.id] = true;
+                  finalOutput.push(obj);
+                }
+              });
+              console.log("Final output", finalOutput);
               // data[0].id = 2;
-
+              function addPartnerId(mid, fid) {
+                for (let j = 0; j < finalOutput.length; j++) {
+                  if (finalOutput[j].id == mid) {
+                    console.log("True check", mid);
+                    finalOutput[j].pid = fid;
+                  } else if (finalOutput[j].id == fid) {
+                    console.log("True check fid", fid);
+                    finalOutput[j].pid = mid;
+                  }
+                }
+              }
               console.log("Uniques data", uniqueData);
-              // console.log("Final output ", finalOutput);
-              // for (let i = 0; i < checkTest.length; i++) {
-              //   finalOutput[i] = checkTest[i];
-              // }
+              for (let i = 0; i < finalOutput.length; i++) {
+                console.log("Testing", finalOutput[i]);
+                if (finalOutput[i].mid && finalOutput[i].fid) {
+                  console.log("Enterd");
+                  addPartnerId(finalOutput[i].mid, finalOutput[i].fid);
+                }
+              }
+              console.log("FUll final", finalOutput);
+
+              // program to generate random strings
+
+              // declare all characters
+              const characters =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+              function generateNumberId() {
+                const newId = 100000 + Math.floor(Math.random() * 900000);
+
+                for (let j = 0; j < finalOutput.length; j++) {
+                  if (finalOutput[j].id == newId) {
+                    return generateNumberId();
+                  }
+                }
+
+                return newId;
+              }
+              let listOfAllDummyId = [];
+              async function createDummyPartner(
+                fatherExist,
+                partnerId,
+                memberId
+              ) {
+                let template = {
+                  //   id: undefined,
+                  //   fid: undefined,
+                  //   mid: undefined,
+                  //   pid: undefined,
+                  addr: "",
+                  name: "",
+                  photo:
+                    "https://static.vecteezy.com/system/resources/previews/002/377/145/original/gold-symbol-of-question-mark-in-black-background-free-vector.jpg",
+                  title: "Title",
+                  gender: "",
+                };
+                if (fatherExist) {
+                  template.gender = "FEMALE";
+                  template.id = await generateString(10);
+                  template.pid = partnerId;
+                  finalOutput.push(template);
+                  memberId.mid = template.id;
+                  listOfAllDummyId.push(template);
+                  window.location.setItem("dummy_id", listOfAllDummyId);
+                  return;
+                }
+                template.gender = "MALE";
+                template.id = await generateString(10);
+                template.pid = partnerId;
+                finalOutput.push(template);
+                memberId.pid = template.id;
+                listOfAllDummyId.push(template);
+                window.location.setItem("dummy_id", listOfAllDummyId);
+                return;
+              }
+              for (let i = 0; i < finalOutput.length; i++) {
+                let members = finalOutput[i];
+                if (members.fid && !members.mid) {
+                  createDummyPartner(true, members.fid, members.id);
+                } else if (members.mid && !members.fid) {
+                  createDummyPartner(false, members.mid, members.id);
+                }
+              }
 
               // console.log("Check", finalOutput);
-              finalOutput = data;
+              // finalOutput = data;
               loadFamilyTree();
               // finalOutput[0].pid = 118;
             });
@@ -653,7 +732,7 @@
       // Function to load the family tree with the updated data
       function loadFamilyTree() {
         var params = {
-          data: finalCheck,
+          data: finalOutput,
           search: false,
           container: "divFamily",
           template: "rounded",
