@@ -320,7 +320,7 @@
       var params = {};
       let outputArr = [];
 
-      let finalOutput = [];
+      var finalOutput = [];
       let uniqueObjects = {};
       var jsonData = [];
       // var input = [
@@ -401,95 +401,17 @@
       //     },
       //   },
       // ];
+      var checkInput = [];
       var input = [];
-      var data2 = [
-        {
-          user: {
-            id: 110,
-            name: "ShreyanshSohane",
-            gender: "MALE",
-          },
-        },
-      ];
-      var checkTest = [
-        {
-          addr: "",
-          name: "Father Doe",
-          photo: "",
-          title: "Title",
-          gender: "MALE",
-          id: 1,
-          pid: 85,
-        },
-        {
-          addr: "",
-          name: "Mommy Doe",
-          photo: "",
-          title: "Title",
-          gender: "female",
-          id: 85,
-          pid: 1,
-        },
-        {
-          addr: "",
-          name: "Jane Doe",
-          photo: "",
-          title: "Title",
-          gender: "female",
-          id: 86,
-          pid: 87,
-          fid: 1,
-          mid: 85,
-        },
-        {
-          addr: "",
-          name: "Kane Doe",
-          photo: "",
-          title: "Title",
-          gender: "MALE",
-          id: 88,
-          fid: 1,
-          mid: 85,
-        },
-        {
-          addr: "",
-          name: "Jane's Daughter",
-          photo: "",
-          title: "Title",
-          gender: "female",
-          id: 91,
-          mid: 86,
-          fid: 87,
-        },
-        {
-          addr: "",
-          name: "Test Doe",
-          photo: "",
-          title: "Title",
-          gender: "MALE",
-          id: 87,
-          pid: 86,
-        },
-      ];
-
       var finalCheck = [
         {
           addr: "",
-          gender: "FEMALE",
-          id: 120,
-          name: "QWERTCHECKQWERT",
-          photo: "",
-          // pid: 1,
-          title: "Title",
-        },
-        {
-          addr: "",
-          fid: 1,
           gender: "MALE",
-          id: 11,
-          mid: 120,
-          name: "Shreyansh SohaneSohane",
+          mid: 95,
+          id: 127,
+          name: "ANKIT FATHER FATHER MOTHER",
           photo: "",
+          fid: 1,
           title: "Title",
         },
 
@@ -497,12 +419,123 @@
           addr: "",
           gender: "MALE",
           id: 1,
-          name: "QWERTQWERT",
+          name: "ANKIT FATHER FATHER FATHER",
           photo: "",
-          // pid: 120,
+          pid: 95,
+          title: "Title",
+        },
+        {
+          addr: "",
+          gender: "FEMALE",
+          id: 95,
+          name: "???",
+          photo:
+            "https://static.vecteezy.com/system/resources/previews/002/377/145/original/gold-symbol-of-question-mark-in-black-background-free-vector.jpg",
+          pid: 1,
           title: "Title",
         },
       ];
+      // var data2 = [
+      //   {
+      //     user: {
+      //       id: 110,
+      //       name: "ShreyanshSohane",
+      //       gender: "MALE",
+      //     },
+      //   },
+      // ];
+      // var checkTest = [
+      //   {
+      //     addr: "",
+      //     name: "Father Doe",
+      //     photo: "",
+      //     title: "Title",
+      //     gender: "MALE",
+      //     id: 1,
+      //     pid: 85,
+      //   },
+      //   {
+      //     addr: "",
+      //     name: "Mommy Doe",
+      //     photo: "",
+      //     title: "Title",
+      //     gender: "female",
+      //     id: 85,
+      //     pid: 1,
+      //   },
+      //   {
+      //     addr: "",
+      //     name: "Jane Doe",
+      //     photo: "",
+      //     title: "Title",
+      //     gender: "female",
+      //     id: 86,
+      //     pid: 87,
+      //     fid: 1,
+      //     mid: 85,
+      //   },
+      //   {
+      //     addr: "",
+      //     name: "Kane Doe",
+      //     photo: "",
+      //     title: "Title",
+      //     gender: "MALE",
+      //     id: 88,
+      //     fid: 1,
+      //     mid: 85,
+      //   },
+      //   {
+      //     addr: "",
+      //     name: "Jane's Daughter",
+      //     photo: "",
+      //     title: "Title",
+      //     gender: "female",
+      //     id: 91,
+      //     mid: 86,
+      //     fid: 87,
+      //   },
+      //   {
+      //     addr: "",
+      //     name: "Test Doe",
+      //     photo: "",
+      //     title: "Title",
+      //     gender: "MALE",
+      //     id: 87,
+      //     pid: 86,
+      //   },
+      // ];
+
+      // var finalCheck = [
+      //   {
+      //     addr: "",
+      //     gender: "FEMALE",
+      //     id: 120,
+      //     name: "QWERTCHECKQWERT",
+      //     photo: "",
+      //     // pid: 1,
+      //     title: "Title",
+      //   },
+      //   {
+      //     addr: "",
+      //     fid: 1,
+      //     gender: "MALE",
+      //     id: 11,
+      //     mid: 120,
+      //     name: "Shreyansh SohaneSohane",
+      //     photo: "",
+      //     title: "Title",
+      //   },
+
+      //   {
+      //     addr: "",
+      //     gender: "MALE",
+      //     id: 1,
+      //     name: "QWERTQWERT",
+      //     photo: "",
+      //     // pid: 120,
+      //     title: "Title",
+      //   },
+      // ];
 
       async function genderFinder(id) {
         console.log("id received", id);
@@ -624,7 +657,7 @@
                 input[i].parentId = 1;
               }
             }
-            check().then((data) => {
+            check().then(async (data) => {
               console.log("Entered params", data);
               data.forEach((obj) => {
                 if (!uniqueObjects[obj.id]) {
@@ -657,12 +690,8 @@
 
               // program to generate random strings
 
-              // declare all characters
-              const characters =
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
               function generateNumberId() {
-                const newId = 100000 + Math.floor(Math.random() * 900000);
+                const newId = 10 + Math.floor(Math.random() * 90);
 
                 for (let j = 0; j < finalOutput.length; j++) {
                   if (finalOutput[j].id == newId) {
@@ -684,7 +713,7 @@
                   //   mid: undefined,
                   //   pid: undefined,
                   addr: "",
-                  name: "",
+                  name: "Ankit",
                   photo:
                     "https://static.vecteezy.com/system/resources/previews/002/377/145/original/gold-symbol-of-question-mark-in-black-background-free-vector.jpg",
                   title: "Title",
@@ -692,34 +721,50 @@
                 };
                 if (fatherExist) {
                   template.gender = "FEMALE";
-                  template.id = await generateString(10);
+                  template.id = await generateNumberId(10);
                   template.pid = partnerId;
+                  console.log("before", finalOutput.length);
                   finalOutput.push(template);
+                  console.log("after", finalOutput.length);
                   memberId.mid = template.id;
+                  addPartnerId(memberId.mid, memberId.fid);
                   listOfAllDummyId.push(template);
-                  window.location.setItem("dummy_id", listOfAllDummyId);
+                  window.localStorage.setItem(
+                    "dummy_id",
+                    JSON.stringify(listOfAllDummyId)
+                  );
+                  console.log("Test member", memberId);
                   return;
                 }
                 template.gender = "MALE";
-                template.id = await generateString(10);
+                template.id = await generateNumberId(10);
                 template.pid = partnerId;
                 finalOutput.push(template);
                 memberId.pid = template.id;
+                addPartnerId(memberId.mid, memberId.fid);
                 listOfAllDummyId.push(template);
-                window.location.setItem("dummy_id", listOfAllDummyId);
+                window.localStorage.setItem(
+                  "dummy_id",
+                  JSON.stringify(listOfAllDummyId)
+                );
                 return;
               }
-              for (let i = 0; i < finalOutput.length; i++) {
-                let members = finalOutput[i];
+              let testCheck = finalOutput;
+              for (let i = 0; i < testCheck.length; i++) {
+                let members = testCheck[i];
                 if (members.fid && !members.mid) {
-                  createDummyPartner(true, members.fid, members.id);
+                  await createDummyPartner(true, members.fid, members);
+                  console.log("Final final outpur", finalOutput.length);
                 } else if (members.mid && !members.fid) {
-                  createDummyPartner(false, members.mid, members.id);
+                  await createDummyPartner(false, members.mid, members);
                 }
               }
 
+              console.log("FUll ", finalOutput);
+
               // console.log("Check", finalOutput);
               // finalOutput = data;
+              checkInput = finalOutput;
               loadFamilyTree();
               // finalOutput[0].pid = 118;
             });
@@ -731,8 +776,10 @@
 
       // Function to load the family tree with the updated data
       function loadFamilyTree() {
+        console.log("Final Output for testing", checkInput.length);
+        console.log("Final Check for testing", finalCheck);
         var params = {
-          data: finalOutput,
+          data: checkInput,
           search: false,
           container: "divFamily",
           template: "rounded",
