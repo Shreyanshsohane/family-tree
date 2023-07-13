@@ -627,7 +627,7 @@
           Authorization: "Bearer " + token,
         };
 
-        return fetch("http://localhost:1337/api/relation/tree", {
+        return fetch("https://backend.my-roots.in/api/relation/tree", {
           headers,
         })
           .then((response) => response.json())
